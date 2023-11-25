@@ -2,11 +2,13 @@ package com.example.tp6_swagger.service;
 
 import com.example.tp6_swagger.model.Contact;
 import com.example.tp6_swagger.repository.ContactRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.List;
 
+@Service
 public class ContactService implements ContactRepository {
     private List<Contact> contacts = new ArrayList<>();
 
