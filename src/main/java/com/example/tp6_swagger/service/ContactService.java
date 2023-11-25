@@ -24,21 +24,41 @@ public class ContactService implements ContactRepository {
 
     @Override
     public Contact getByID(Long id) {
-        return null;
+        return this.contacts.stream()
+                .filter(index -> index.getId().equals(id))
+                .findAny()
+                .orElseThrow(EmptyStackException::new);
     }
 
     @Override
     public Contact save(Contact c) {
-        return null;
+        this.contacts.add(c);
+        return c;
     }
 
     @Override
     public Contact update(Contact c) {
-        return null;
+        Contact updateContact = this.contacts.stream()
+                .filter( index -> index.getId().equals(c.getId()))
+                .findAny()
+                .orElseThrow(EmptyStackException::new);
+
+        updateContact.setFirstName(c.getFirstName());
+        updateContact.setLastName(c.getLastName());
+        updateContact.setEmail(c.getEmail());
+        updateContact.setPhone(c.getPhone());
+        updateContact.setAddress(c.getAddress());
+
+        return updateContact;
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        Contact contact = this.contacts.stream()
+                .filter(index -> index.getId().equals(id))
+                .findAny()
+                .orElseThrow(EmptyStackException::new);
+        ;
+        return this.contacts.remove(contact);
     }
 }
